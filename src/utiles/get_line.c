@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include <sys/types.h>
 #include <stdlib.h>
-#include "my.h"
+#include "../include/my.h"
 
 char *get_line(void)
 {

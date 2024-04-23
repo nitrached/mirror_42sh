@@ -5,7 +5,7 @@
 ** handle_pipe
 */
 #include "my.h"
-#include "minishell.h"
+#include "../include/minishell.h"
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdlib.h>

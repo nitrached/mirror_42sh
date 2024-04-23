@@ -5,7 +5,7 @@
 ** main
 */
 #include "my.h"
-#include "minishell.h"
+#include "../include/minishell.h"
 #include <stddef.h>
 #include <stdlib.h>
 

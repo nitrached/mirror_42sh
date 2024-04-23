@@ -4,8 +4,8 @@
 ** File description:
 ** minishell
 */
-#include "my.h"
-#include "minishell.h"
+#include "../include/my.h"
+#include "../include/minishell.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,19 +16,22 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+void display_prompt(void)
+{
+    if (isatty(STDIN_FILENO))
+        my_putstr("$> ");
+}
+
 int my_minishell(char **env)
 {
-    char *line;
-    char **args = NULL;
     minishell_t *minishell = NULL;
-
-    minishell = init_struct();
-    ENV = my_tabdup(env);
     while (1) {
-        if (parse_pipe(minishell, &line, &args) == 84) {
-            break;
+        minishell = init_struct(env);
+        display_prompt();
+        read_command(minishell);
+        for (int i = 0; INPUTS->semicolon[i] != NULL; i++) {
+            parse_pipe(minishell, i);
         }
     }
-    free(line);
     return (minishell->status);
 }

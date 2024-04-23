@@ -7,28 +7,24 @@
 
 NAME		= 42sh
 
-SRCS		= src/main.c
-SRCS		+= src/utiles/get_line.c
-SRCS		+= src/utiles/my_putstr_fd.c
-SRCS		+= src/utiles/my_getenv.c
-SRCS		+= src/utiles/tab_addline.c
-SRCS		+= src/utiles/my_tabdup.c
-SRCS		+= src/utiles/print_dash_help.c
-SRCS		+= src/utiles/tab_del_line.c
-SRCS		+= src/utiles/init_struct.c
-SRCS		+= src/utiles/is_piped.c
-SRCS	    += src/utiles/get_last_line_tab.c
-SRCS	    += src/utiles/handle_error.c
-SRCS		+= src/command_handler/my_exit.c
-SRCS		+= src/command_handler.c
-SRCS		+= src/minishell.c
-SRCS		+= src/command_handler/my_cd.c
-SRCS		+= src/command_handler/my_env.c
-SRCS		+= src/command_handler/my_setenv.c
-SRCS		+= src/command_handler/my_unsetenv.c
-SRCS	    += src/command_handler/check_path.c
-SRCS        += src/handle_pipe/handle_pipe.c
-SRCS        += src/handle_redirection/handle_redirection.c
+SRCS		= src/main.c\
+			  src/minishell.c\
+			  src/parse_command.c\
+			  src/read_command.c\
+			  src/utiles/init_struct.c\
+			  src/check_parsing/check_pipe.c\
+			  src/check_parsing/check_redirections.c\
+			  src/utiles/my_putstr_fd.c\
+			  src/utiles/sh_word_array.c\
+			  src/utiles/tab_del_line.c\
+			  src/utiles/get_line.c\
+			  src/utiles/my_getenv.c\
+			  src/utiles/print_dash_help.c\
+			  src/utiles/tab_addline.c\
+			  src/utiles/my_tabdup.c\
+			  src/utiles/get_last_line_tab.c\
+			  src/utiles/handle_error.c\
+			  src/utiles/is_piped.c
 
 
 OBJS     = $(SRCS:.c=.o)
@@ -55,19 +51,19 @@ clean:
 	find . -name "#*#" -delete -o -name "*~" -delete
 	$(RM) coding-style-reports.log
 	$(RM) vgcore*
+	clear
 
 fclean: clean
 	$(RM) a.out
 	$(RM) lib/libmy.a
 	$(RM) $(NAME)
+	clear
 
 re: fclean all
 
 debug: fclean
 debug: CFLAGS += -g
 debug: all
-
-tests_run:
 
 .c.o:
 	@ $(CC) -o $(subst .c,.o,$<) -c $< $(CFLAGS) \

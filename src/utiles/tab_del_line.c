@@ -14,5 +14,6 @@ int tab_delline(char ***tab, int len, int line_to_del)
     for (int i = line_to_del; i < len - 1; i++) {
         (*tab)[i] = (*tab)[i + 1];
     }
+    (*tab)[len - 1] = NULL;
     return 1;
 }

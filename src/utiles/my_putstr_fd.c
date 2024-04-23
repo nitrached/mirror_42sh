@@ -14,5 +14,5 @@ int my_putstr_fd(char const *str, int fd)
         write(fd, &str[i], 1);
         i++;
     }
-    return (0);
+    return (i);
 }
