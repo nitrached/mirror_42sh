@@ -67,6 +67,8 @@ debug: fclean
 debug: CFLAGS += -g
 debug: all
 
+tests_run:
+
 .c.o:
 	@ $(CC) -o $(subst .c,.o,$<) -c $< $(CFLAGS) \
 		&& echo -e "[ ${GREEN}OK${NC} ] ${GREY}$<${NC}" \
