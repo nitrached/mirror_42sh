@@ -17,14 +17,20 @@ SRCS		= src/main.c\
 			  src/utiles/my_putstr_fd.c\
 			  src/utiles/sh_word_array.c\
 			  src/utiles/tab_del_line.c\
-			  src/utiles/get_line.c\
 			  src/utiles/my_getenv.c\
 			  src/utiles/print_dash_help.c\
 			  src/utiles/tab_addline.c\
 			  src/utiles/my_tabdup.c\
 			  src/utiles/get_last_line_tab.c\
 			  src/utiles/handle_error.c\
-			  src/utiles/is_piped.c
+			  src/utiles/is_piped.c\
+			  src/input/parsing.c\
+			  src/input/settings.c\
+			  src/input/specials_characters/arrow.c\
+			  src/input/specials_characters/backspace.c\
+			  src/utiles/remove_last_char.c\
+			  src/input/refactor.c\
+			  src/utiles/strlen_special_char.c\
 
 
 OBJS     = $(SRCS:.c=.o)
