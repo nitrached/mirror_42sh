@@ -28,9 +28,9 @@ SRCS		= src/main.c\
 			  src/input/settings.c\
 			  src/input/specials_characters/arrow.c\
 			  src/input/specials_characters/backspace.c\
+			  src/input/specials_characters/erase.c\
 			  src/utiles/remove_last_char.c\
 			  src/input/refactor.c\
-
 
 OBJS     = $(SRCS:.c=.o)
 

@@ -30,23 +30,6 @@ void remove_char_from_str(input_t *input)
     (input->buffer)[input->buffer_size] = 0;
 }
 
-static void middle(input_t *input)
-{
-    bool isSpe = false;
-
-    my_putstr("\033[K");
-    my_putstr(input->buffer + (int) input->cursor_position);
-    for (int i = 0; i < (int) strlen(input->buffer) -
-    (int) input->cursor_position; i++) {
-        if (input->buffer[(int) strlen(input->buffer) - i] < 0 && !isSpe) {
-            isSpe = true;
-            continue;
-        }
-        isSpe = false;
-        my_putstr("\033[D");
-    }
-}
-
 void delete(input_t *input)
 {
     if (input->buffer_size > 0 && ((int)input->cursor_position) > 0) {

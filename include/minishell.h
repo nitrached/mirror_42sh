@@ -166,11 +166,15 @@ void reset_term(struct termios *old);
 void set_non_canonical(struct termios *old);
 void arrow(input_t *input);
 void delete(input_t *input);
-int add_char(input_t *input);
+int add_char(input_t *input, bool *isSpe);
+void erase(input_t *input);
+void middle(input_t *input);
+void remove_char_from_str(input_t *input);
 
-static const keybind_t tab_keybinds[3] = {
+static const keybind_t tab_keybinds[4] = {
         {'\033', &arrow},
         {127, &delete},
+        {126, &erase},
         {0, 0},
 };
 

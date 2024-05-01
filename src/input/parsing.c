@@ -27,12 +27,13 @@ char *parse_input(void)
 {
     struct termios old;
     input_t input = {NULL, 0, 0, 0};
+    bool isSpe = false;
 
     set_non_canonical(&old);
     while (read(STDIN_FILENO, &input.c, 1) != -1 && input.c != '\n') {
         if (check_special_characters(&input) == 1)
             continue;
-        if (add_char(&input) == 84)
+        if (add_char(&input, &isSpe) == 84)
             return NULL;
     }
     reset_term(&old);

@@ -30,14 +30,14 @@ static int new_str(input_t *input)
     return 0;
 }
 
-static void middle(input_t *input)
+void middle(input_t *input)
 {
     bool isSpe = false;
 
     my_putstr("\033[K");
     my_putstr(input->buffer + (int) input->cursor_position);
     for (int i = 0; i < (int) strlen(input->buffer) -
-                        (int) input->cursor_position; i++) {
+        (int) input->cursor_position; i++) {
         if (input->buffer[(int) strlen(input->buffer) - i] < 0 && !isSpe) {
             isSpe = true;
             continue;
@@ -49,19 +49,23 @@ static void middle(input_t *input)
 
 static void refactor(input_t *input)
 {
-    memmove(input->buffer + (int)input->cursor_position + 1, input->buffer + (int)input->cursor_position,
+    memmove(input->buffer + (int)input->cursor_position + 1,
+        input->buffer + (int)input->cursor_position,
         input->buffer_size - (int)input->cursor_position + 1);
     input->buffer[(int)input->cursor_position] = input->c;
     input->buffer[input->buffer_size + 1] = 0;
 }
 
-int add_char(input_t *input)
+int add_char(input_t *input, bool *isSpe)
 {
     my_putchar(input->c);
     if (new_str(input) == 84)
         return 84;
-    if (input->c > 0)
+    if ((*isSpe) == true || input->c > 0) {
         middle(input);
+        (*isSpe) = false;
+    } else
+        (*isSpe) = true;
     refactor(input);
     handle_index(input);
     return 0;
