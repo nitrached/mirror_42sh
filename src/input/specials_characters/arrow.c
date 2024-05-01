@@ -23,7 +23,7 @@ void arrow(input_t *input)
         return;
     }
     if (input->c == 'D' && input->cursor_position > 0) {
-        if (input->buffer[(int)input->cursor_position - 1] < 0)
+        if (input->buffer[(int) input->cursor_position - 1] < 0)
             input->cursor_position--;
         input->cursor_position--;
         my_putstr("\033[D");
