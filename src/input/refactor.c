@@ -13,10 +13,7 @@
 
 static void handle_index(input_t *input)
 {
-    if (input->c < 0)
-        input->cursor_position += 0.5;
-    else
-        input->cursor_position++;
+    input->cursor_position++;
     input->buffer_size++;
 }
 

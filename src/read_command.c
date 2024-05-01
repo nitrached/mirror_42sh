@@ -12,6 +12,8 @@
 void read_command(minishell_t *minishell)
 {
     INPUTS->line = parse_input();
+    printf("[%s]\n", INPUTS->line);
+    exit(0);
     if (INPUTS->line == NULL) {
         minishell->status = 84;
         return;
