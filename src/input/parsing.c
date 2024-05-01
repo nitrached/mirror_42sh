@@ -10,6 +10,7 @@
 #include "minishell.h"
 #include "my.h"
 #include <string.h>
+#include <stdio.h>
 
 static int check_special_characters(input_t *input)
 {

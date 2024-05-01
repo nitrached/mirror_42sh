@@ -17,7 +17,9 @@ void arrow(input_t *input)
         return;
     }
     if (input->c == 'C' &&
-    input->cursor_position < strlen_special_char(input->buffer)) {
+    input->cursor_position < my_strlen(input->buffer)) {
+        if (input->buffer[(int) input->cursor_position + 1] < 0)
+            input->cursor_position++;
         input->cursor_position++;
         my_putstr("\033[C");
         return;

@@ -145,7 +145,6 @@ int print_dash_help(void);
 char **my_tabdup(char **tab);
 int tab_delline(char ***tab, int len, int line_to_del);
 void remove_last_char(char **buffer, const size_t buffer_size);
-int strlen_special_char(char *str);
 //int is_piped(char *command_line);
 int get_last_line_tab(char **tab);
 int handle_signal(int wait_status);

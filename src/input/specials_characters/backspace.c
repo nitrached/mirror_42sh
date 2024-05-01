@@ -34,7 +34,6 @@ static void middle(input_t *input)
 {
     bool isSpe = false;
 
-    my_putstr("\b \b");
     my_putstr("\033[K");
     my_putstr(input->buffer + (int) input->cursor_position);
     for (int i = 0; i < (int) strlen(input->buffer) -
@@ -51,6 +50,7 @@ static void middle(input_t *input)
 void delete(input_t *input)
 {
     if (input->buffer_size > 0 && ((int)input->cursor_position) > 0) {
+        my_putstr("\b \b");
         middle(input);
     }
     if (input->cursor_position >= 1 &&

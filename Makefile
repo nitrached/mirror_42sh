@@ -30,7 +30,6 @@ SRCS		= src/main.c\
 			  src/input/specials_characters/backspace.c\
 			  src/utiles/remove_last_char.c\
 			  src/input/refactor.c\
-			  src/utiles/strlen_special_char.c\
 
 
 OBJS     = $(SRCS:.c=.o)
