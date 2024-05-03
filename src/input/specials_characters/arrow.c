@@ -8,34 +8,27 @@
 #include <unistd.h>
 #include "../../../include/minishell.h"
 #include "../../../include/my.h"
+#include <malloc.h>
 
 void arrow(input_t *input)
 {
     read(STDIN_FILENO, &input->c, 1);
     read(STDIN_FILENO, &input->c, 1);
-    if (input->c == 'A' || input->c == 'B') {
-        // printf("\033[%dD", 2);
-        // printf("%c[2K\r", 27);
-        // my_putstr("\033[C");
-        // printf("\33[2K\r");
-        // printf("\x1b[2K");
-        // printf("%s", "heiut");
-        int i = 0;
-        int len = my_strlen(input->buffer);
-        // printf("Len : %d\n", my_strlen(input->buffer));
-        for (i = 0; i < len; i++) {
-            my_putstr("\b \b");
-        }
-        free(input->buffer);
-        // input->buffer_size = my_strlen("zebi") + 1;
-        input->buffer = malloc(sizeof(char) * 4);
-        input->buffer = "zebi";
-        my_putstr(input->buffer);
-        input->buffer_size = 4;
-        // printf("buffer size : %ld\n", input->buffer_size);
-        input->cursor_position = my_strlen(input->buffer);
-        // printf("cursor pos : %lf\n", input->cursor_position);
+    if (input->c == 'B')
         return;
+    if (input->c == 'A') {
+        for (; input->cursor_position > 0; input->cursor_position--)
+            my_putstr("\033[D");
+        my_putstr("\033[K");
+        free(input->buffer);
+        input->buffer = malloc(sizeof(char) * 3);
+        input->buffer[0] = 'l';
+        input->buffer[1] = 's';
+        input->buffer[2] = 0;
+        input->buffer_size = 2;
+        my_putstr(input->buffer);
+        input->buffer_size = my_strlen(input->buffer);
+        input->cursor_position = my_strlen(input->buffer);
     }
     if (input->c == 'C' &&
     input->cursor_position < my_strlen(input->buffer)) {
