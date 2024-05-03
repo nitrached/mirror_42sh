@@ -103,7 +103,7 @@ int get_last_line_tab(char **tab);
 int handle_signal(int wait_status);
 void handle_error_tab(int i, int num_sig);
 int handle_error(char *command);
-int pipe_error(char **args, char *command);
+int pipe_error(char **args, char *command, minishell_t *minishell);
 
 //handle_pipe
 int parse_pipe(minishell_t *minishell, char **line, char ***args);

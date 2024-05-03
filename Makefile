@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-NAME		= 42sh
+NAME		= mysh
 
 SRCS		= src/main.c
 SRCS		+= src/utiles/get_line.c
@@ -55,19 +55,18 @@ clean:
 	find . -name "#*#" -delete -o -name "*~" -delete
 	$(RM) coding-style-reports.log
 	$(RM) vgcore*
+	clear
 
 fclean: clean
 	$(RM) a.out
 	$(RM) lib/libmy.a
-	$(RM) $(NAME)
+	clear
 
 re: fclean all
 
 debug: fclean
 debug: CFLAGS += -g
 debug: all
-
-tests_run:
 
 .c.o:
 	@ $(CC) -o $(subst .c,.o,$<) -c $< $(CFLAGS) \

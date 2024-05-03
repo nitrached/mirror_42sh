@@ -57,7 +57,7 @@ int handle_error(char *command)
     return 0;
 }
 
-int pipe_error(char **args, char *command)
+int pipe_error(char **args, char *command, minishell_t *minishell)
 {
     int j = 0;
     int a = 0;
@@ -72,6 +72,7 @@ int pipe_error(char **args, char *command)
     for (; args[j] != NULL; j++);
     if (j < 2 || a == 0 || my_strcmp(command, " | ") == 0) {
         my_putstr_fd("Invalid null command.\n", 2);
+        minishell->status = 1;
         return 84;
     }
     return 1;

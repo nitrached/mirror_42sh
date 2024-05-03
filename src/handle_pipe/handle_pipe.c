@@ -26,29 +26,44 @@ void set_struct_piped(minishell_t *minishell, char **args)
         minishell->pid[j] = -1;
 }
 
-static int handle_pipe(minishell_t *minishell, char *command_line)
+static void handle_pipe(minishell_t *minishell, char *command_line)
 {
     char **args = my_str_to_wordarray(command_line, "|><");
     int wait_status;
 
     set_struct_piped(minishell, args);
-    if (pipe_error(args, command_line) == 84)
-        return 84;
-    if (!find_redirection(command_line, minishell))
-        return my_putstr_fd("Ambiguous input redirect.\n", 2);
+    if (pipe_error(args, command_line, minishell) == 84)
+        return;
+    if (!find_redirection(command_line, minishell)) {
+        my_putstr_fd("Ambiguous intput redirect.\n", 2);
+        minishell->status = 1;
+        return;
+    }
     if (minishell->final_write != 1)
         args[get_last_line_tab(args)] = NULL;
-    while (args[INDEX] != NULL) {
+    for (; args[INDEX] != NULL; INDEX++) {
         USER_INPUT = my_str_to_wordarray(args[INDEX], " \t><");
         minishell->args = args;
         command_handler(minishell);
-        INDEX++;
     }
     waitpid(minishell->pid[minishell->cpt - 1], &wait_status, 0);
-    handle_signal(wait_status);
-    return 1;
+    minishell->status = handle_signal(wait_status);
 }
 
+/* char **str_word_array_word_delim(char *string, char **tab_delim)
+{
+
+}
+
+before_handle_no_pipe(minishell_t *minishell, char ***args, int i)
+{
+    char **tab_delim = {"&&", "||", NULL};
+    char **tab = str_word_array_word_delim((*args)[i], tab_delim);
+
+    for (int j = 0; tab[j] != NULL; j++) {
+        handle_no_pipe(minishell, &tab, j);
+    }
+} */
 static int handle_no_pipe(minishell_t *minishell, char ***args, int i)
 {
     USER_INPUT = my_str_to_wordarray((*args)[i], " \t<>");

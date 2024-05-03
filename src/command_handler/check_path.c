@@ -31,7 +31,7 @@ static int execute_command(char *full_path, minishell_t *minishell)
         exit(0);
     } else {
         waitpid(pid, &wait_status, 0);
-        handle_signal(wait_status);
+        minishell->status = handle_signal(wait_status);
         if (minishell->last_stdout)
             dup2(minishell->last_stdout, STDIN_FILENO);
     return 1;
@@ -129,18 +129,20 @@ int setup_command(char **tab_path, minishell_t *minishell)
 int check_path(minishell_t *minishell)
 {
     char **tab_path = NULL;
+    int tmp = 84;
 
-    minishell->status = 84;
     if (access(USER_INPUT[0], F_OK) == 0) {
         return execute_command(USER_INPUT[0], minishell);
     }
     for (int i = 0; ENV[i] != NULL; i++) {
         if (!my_strncmp(ENV[i], "PATH=", 5)) {
             tab_path = my_str_to_wordarray(ENV[i] + 5, ":");
-            minishell->status = setup_command(tab_path, minishell);
+            tmp = setup_command(tab_path, minishell);
         }
     }
-    if (minishell->status == 84)
+    if (tmp == 84) {
         my_printf("%s: Command not found.\n", USER_INPUT[0]);
-    return minishell->status;
+        minishell->status = 1;
+    }
+    return tmp;
 }
