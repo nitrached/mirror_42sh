@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-NAME		= mysh
+NAME		= 42sh
 
 SRCS		= src/main.c
 SRCS		+= src/utiles/get_line.c
