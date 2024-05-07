@@ -131,9 +131,8 @@ int check_path(minishell_t *minishell)
     char **tab_path = NULL;
     int tmp = 84;
 
-    if (access(USER_INPUT[0], F_OK) == 0) {
+    if (access(USER_INPUT[0], F_OK) == 0)
         return execute_command(USER_INPUT[0], minishell);
-    }
     for (int i = 0; ENV[i] != NULL; i++) {
         if (!my_strncmp(ENV[i], "PATH=", 5)) {
             tab_path = my_str_to_wordarray(ENV[i] + 5, ":");

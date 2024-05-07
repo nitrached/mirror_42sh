@@ -41,7 +41,7 @@ int handle_signal(int wait_status)
             my_putstr_fd(" (core dumped)", 2);
         my_printf("\n");
     }
-    return WEXITSTATUS(wait_status);
+    return (wait_status);
 }
 
 int handle_error(char *command)

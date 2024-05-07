@@ -23,9 +23,17 @@ typedef struct minishell_s {
     int first_read;
     int final_write;
     int status;
+    int pipe_status;
     int *pid;
     int cpt;
 } minishell_t;
+
+typedef struct word_array_s {
+    char **tab;
+    int start;
+    int tab_index;
+    int index;
+} word_array_t;
 
 typedef struct command_handler_s {
     char *command;
@@ -104,6 +112,7 @@ int handle_signal(int wait_status);
 void handle_error_tab(int i, int num_sig);
 int handle_error(char *command);
 int pipe_error(char **args, char *command, minishell_t *minishell);
+char **my_str_to_wordarray_multi_delim(char *str, char *delimiters[]);
 
 //handle_pipe
 int parse_pipe(minishell_t *minishell, char **line, char ***args);
@@ -115,5 +124,7 @@ int find_redirection(char *command_line, minishell_t *minishell);
     #define ENV minishell->env
     #define OLD_CD minishell->old_cd
     #define INDEX minishell->command_index
+    #define STATUS minishell->status
+    #define P_STATUS minishell->pipe_status
 
 #endif /* !MINISHELL_H_ */

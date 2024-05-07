@@ -29,6 +29,7 @@ SRCS		+= src/command_handler/my_unsetenv.c
 SRCS	    += src/command_handler/check_path.c
 SRCS        += src/handle_pipe/handle_pipe.c
 SRCS        += src/handle_redirection/handle_redirection.c
+SRCS		+= src/utiles/to_wordarray_multi_delim.c
 
 
 OBJS     = $(SRCS:.c=.o)
