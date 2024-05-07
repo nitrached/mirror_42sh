@@ -89,7 +89,6 @@ jobs:
       - name: Run Tests with make tests_run
         run: |
           make tests_run
-          pwd
           if grep -wq 'KO' output.txt; then
             echo "Tests failed. Exiting with code 1."
             exit 1
