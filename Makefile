@@ -66,11 +66,30 @@ debug: fclean
 debug: CFLAGS += -g
 debug: all
 
+tests_run: fclean
+tests_run: CFLAGS += -lcriterion
+tests_run: all
 tests_run:
+	make -C tests
+	gcc -o test tests/tests_criterion/* --coverage -lcriterion \
+	./src/*.c ./src/command_handler/*.c ./src/handle_pipe/*.c \
+	./src/handle_redirection/*.c ./src/utiles/*.c \
+	./lib/lib/my/*.c ./lib/lib/my/my_libs/*.c ./lib/*.c \
+	./lib/handler/conversion/*.c \
+	./lib/handler/flags/*.c ./lib/handler/precision/*.c \
+	./lib/handler/width/*.c ./lib/parser/*.c -I include -I lib/include
+	./test
+	gcovr --exclude tests/ --branches
+	rm test
+	rm *.gcno
+	rm *.gcda
+
+tests_run_clean: fclean
+	rm *.gcda rm *.gcno
 
 .c.o:
 	@ $(CC) -o $(subst .c,.o,$<) -c $< $(CFLAGS) \
 		&& echo -e "[ ${GREEN}OK${NC} ] ${GREY}$<${NC}" \
 		|| echo -e "[ ${YELLOW}KO${NC} ] ${ITALIC}$<${NC}"
 
-.PHONY: re fclean clean all .c.o
+.PHONY: re fclean clean all .c.o tests_run tests_run_clean
