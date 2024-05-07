@@ -1,4 +1,4 @@
-name: Chocolatine
+name: 42sh
 
 on:
   push:
@@ -84,12 +84,19 @@ jobs:
     name: Running tests with make run test
     runs-on: ubuntu-latest
     timeout-minutes: 2
+    needs: check_program_compilation
     container: epitechcontent/epitest-docker:latest
-    needs:  check_program_compilation
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Run Tests with make tests_run
-        run: make tests_run
+        run: |
+          make tests_run
+          pwd
+          if grep -wq 'KO' output.txt; then
+            echo "Tests failed. Exiting with code 1."
+            exit 1
+          else
+            echo "Tests passed."
+          fi
 

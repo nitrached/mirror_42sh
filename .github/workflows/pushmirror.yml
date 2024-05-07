@@ -1,4 +1,4 @@
-name: Chocolatine
+name: 42sh
 
 on:
   push:
@@ -44,7 +44,6 @@ jobs:
             fields=($(printf "%s" "$line"|cut -d':' --output-delimiter=' ' -f1-))
             echo "::error title=${fields[2]} coding style error,file=${fields[0]},line=${fields[1]}::${fields[3]}"
           done < $input
-
       - name: Report banana result
         run: |
           NB_ERROR=$(cat coding-style-reports.log | wc -l)
@@ -82,14 +81,22 @@ jobs:
     name: Running tests with make run test
     runs-on: ubuntu-latest
     timeout-minutes: 2
+    needs: check_program_compilation
     container: epitechcontent/epitest-docker:latest
-    needs:  check_program_compilation
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Run Tests with make tests_run
-        run: make tests_run
+        run: |
+          pwd
+          ls
+          make tests_run
+          if grep -wq 'KO' output.txt; then
+            echo "Tests failed. Exiting with code 1."
+            exit 1
+          else
+            echo "Tests passed."
+          fi
 
   push_to_mirror:
     name: Pushing to mirror repository with push command
@@ -107,6 +114,5 @@ jobs:
         with:
           target_repo_url:
             ${{ env.MIRROR_SSH }}
-          ssh_private_key: 
+          ssh_private_key:
             ${{ secrets.GIT_SSH_PRIVATE_KEY }}
-            

@@ -60,6 +60,7 @@ clean:
 fclean: clean
 	$(RM) a.out
 	$(RM) lib/libmy.a
+	$(RM) $(NAME)
 
 re: fclean all
 
@@ -67,7 +68,8 @@ debug: fclean
 debug: CFLAGS += -g
 debug: all
 
-tests_run:
+tests_run: all
+	make -C tests
 
 .c.o:
 	@ $(CC) -o $(subst .c,.o,$<) -c $< $(CFLAGS) \
