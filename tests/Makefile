@@ -10,7 +10,7 @@ NAME		= 42sh
 SRCS		= tests_criterion/test_main.c
 
 test:
-	cp ../$(NAME) .
+	cp $(NAME) tests
 	./tester.sh > ../output.txt
 	rm test_redirection_right
 	rm test_double_redirection_right
