@@ -67,7 +67,6 @@ debug: fclean
 debug: CFLAGS += -g
 debug: all
 
-tests_run: fclean
 tests_run: all
 	make -C tests
 
