@@ -82,7 +82,9 @@ void several_occurrences(char **files, input_t *input, char *model)
 
     check_occurrences(files, model, &format, &isOccur);
     if (isOccur) {
-        printf("\n$> %s", input->buffer);
+        printf("\n$> ");
+        if (input->buffer_size > 0)
+            printf("%s", input->buffer);
         fflush(stdout);
     }
 }

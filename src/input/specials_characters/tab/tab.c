@@ -10,6 +10,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 char **retrieve_files(void)
 {
@@ -27,17 +28,18 @@ char **retrieve_files(void)
         buffer[i] = my_strdup(dirp->d_name);
         buffer[i + 1] = 0;
     }
-    buffer[i + 1] = 0;
     closedir(dir);
     return buffer;
 }
 
-static char *get_word(char *string)
+static char *get_word(char *string, int string_size)
 {
-    int i = my_strlen(string);
+    int i = string_size;
 
+    if (i == 0)
+        string = "\0";
     i--;
-    for (; string[i] && string[i] > 32; i--);
+    for (; i >= 0 && string[i] > 32; i--);
     i++;
     for (int j = 0; j < i; j++) {
         string++;
@@ -48,7 +50,7 @@ static char *get_word(char *string)
 void tab(input_t *input)
 {
     char **files = retrieve_files();
-    char *model = get_word(input->buffer);
+    char *model = get_word(input->buffer, (int)input->buffer_size);
 
     if (count_occurrences(files, model) > 1)
         several_occurrences(files, input, model);
