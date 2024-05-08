@@ -26,6 +26,8 @@ typedef struct minishell_s {
     int pipe_status;
     int *pid;
     int cpt;
+    int stdin_savior;
+    int stdout_savior;
 } minishell_t;
 
 typedef struct word_array_s {

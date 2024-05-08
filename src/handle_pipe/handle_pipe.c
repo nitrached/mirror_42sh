@@ -13,11 +13,14 @@
 #include <stdbool.h>
 #include <string.h>
 
+static
 void set_struct_piped(minishell_t *minishell, char **args)
 {
     int j = 0;
 
     INDEX = 0;
+    minishell->stdin_savior = dup(STDIN_FILENO);
+    minishell->stdout_savior = dup(STDOUT_FILENO);
     minishell->cpt = 0;
     minishell->last_stdout = -1;
     minishell->final_write = 1;
@@ -30,6 +33,7 @@ void set_struct_piped(minishell_t *minishell, char **args)
         minishell->pid[j] = -1;
 }
 
+static
 void check_waitpid(minishell_t *minishell, int wait_status)
 {
     for (int p = 0; p < minishell->cpt; p++) {
@@ -37,22 +41,28 @@ void check_waitpid(minishell_t *minishell, int wait_status)
         minishell->status = handle_signal(wait_status);
         P_STATUS = STATUS == 0 ? P_STATUS : STATUS;
     }
+    dup2(minishell->stdin_savior, STDIN_FILENO);
+    dup2(minishell->stdout_savior, STDOUT_FILENO);
     minishell->status = minishell->pipe_status;
+}
+
+static
+void ambigious(minishell_t *minishell)
+{
+    my_putstr_fd("Ambiguous intput redirect.\n", 2);
+    minishell->status = 1;
 }
 
 static void handle_pipe(minishell_t *minishell, char *command_line)
 {
     char **args = my_str_to_wordarray(command_line, "|><");
-    int wait_status;
+    int wait_status = 0;
 
     set_struct_piped(minishell, args);
     if (pipe_error(args, command_line, minishell) == 84)
         return;
-    if (!find_redirection(command_line, minishell)) {
-        my_putstr_fd("Ambiguous intput redirect.\n", 2);
-        minishell->status = 1;
-        return;
-    }
+    if (!find_redirection(command_line, minishell))
+        return ambigious(minishell);
     if (minishell->final_write != 1)
         args[get_last_line_tab(args)] = NULL;
     for (; args[INDEX] != NULL; INDEX++) {
@@ -60,6 +70,8 @@ static void handle_pipe(minishell_t *minishell, char *command_line)
         minishell->args = args;
         command_handler(minishell);
         P_STATUS = STATUS == 0 ? P_STATUS : STATUS;
+        if (P_STATUS != 0)
+            break;
     }
     return check_waitpid(minishell, wait_status);
 }
@@ -67,11 +79,15 @@ static void handle_pipe(minishell_t *minishell, char *command_line)
 static int handle_no_pipe(minishell_t *minishell, char ***args, int i)
 {
     USER_INPUT = my_str_to_wordarray((*args)[i], " \t<>");
+    minishell->stdin_savior = dup(STDIN_FILENO);
+    minishell->stdout_savior = dup(STDOUT_FILENO);
     find_redirection((*args)[i], minishell);
     if (minishell->final_write != 1 || minishell->first_read != 0)
         USER_INPUT[get_last_line_tab(USER_INPUT)] = NULL;
     minishell->is_piped = 0;
     command_handler(minishell);
+    dup2(minishell->stdin_savior, STDIN_FILENO);
+    dup2(minishell->stdout_savior, STDOUT_FILENO);
     return 1;
 }
 
