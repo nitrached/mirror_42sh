@@ -50,7 +50,7 @@ void tab(input_t *input)
     char **files = retrieve_files();
     char *model = get_word(input->buffer);
 
-    if (count_occurrences(input, files, model) > 1)
+    if (count_occurrences(files, model) > 1)
         several_occurrences(files, input, model);
     else
         one_occurrence(files, input, model);
