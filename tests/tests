@@ -147,3 +147,193 @@ TESTS=
   echo "This is a test with quotes"
   echo 'This is a test with escaped quotes'
 [18-END]
+
+[19]
+NAME="Test &&"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls && grep n"
+[19-END]
+
+[20]
+NAME="Test && failed"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "coucou && grep n"
+[20-END]
+
+[21]
+NAME="Test && with pipe"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n && echo "ca marche""
+[21-END]
+
+[22]
+NAME="Test && with pipe that fail"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "coucou | grep n && echo "ca marche""
+[22-END]
+
+[23]
+NAME="Test && with multiple pipes"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n | grep i && echo "ca marche""
+[23-END]
+
+[24]
+NAME="Test && with multiple pipes that failed"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "coucou | grep n | grep i && echo "ca marche""
+[24-END]
+
+[25]
+NAME="Test && with redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls > test && echo "ca marche""
+[25-END]
+
+[26]
+NAME="Test && with double redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls >> test && echo "ca marche""
+[26-END]
+
+[27]
+NAME="Test && with pipe and redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n > test && echo "ca marche""
+[27-END]
+
+[28]
+NAME="Test && with multiple pipe and redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n | grep i > test && echo "ca marche""
+[28-END]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[29]
+NAME="Test ||"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls || grep n"
+[29-END]
+
+[30]
+NAME="Test || failed"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "coucou || grep n"
+[30-END]
+
+[31]
+NAME="Test || with pipe"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n || echo "ca marche""
+[31-END]
+
+[32]
+NAME="Test || with pipe that fail"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "coucou | grep n || echo "ca marche""
+[32-END]
+
+[33]
+NAME="Test || with multiple pipes"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n | grep i || echo "ca marche""
+[33-END]
+
+[34]
+NAME="Test || with multiple pipes that failed"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "coucou | grep n | grep i || echo "ca marche""
+[34-END]
+
+[35]
+NAME="Test || with redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls > test || echo "ca marche""
+[35-END]
+
+[36]
+NAME="Test || with double redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls >> test || echo "ca marche""
+[36-END]
+
+[37]
+NAME="Test || with pipe and redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n > test || echo "ca marche""
+[37-END]
+
+[38]
+NAME="Test || with multiple pipe and redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n | grep i > test || echo "ca marche""
+[38-END]
+
+[39]
+NAME="Test || and && and with multiple pipe and redirection right"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls | grep n | grep i > test && echo "ca marche" || echo "ca marche pas""
+[39-END]
