@@ -19,7 +19,7 @@ static void handle_index(input_t *input)
 
 static int new_str(input_t *input)
 {
-    char *tmp = realloc(input->buffer, input->buffer_size + 1);
+    char *tmp = realloc(input->buffer, input->buffer_size + 2);
 
     if (tmp != NULL) {
         input->buffer = tmp;
@@ -49,8 +49,9 @@ void middle(input_t *input)
 
 static void refactor(input_t *input)
 {
-    memmove(input->buffer + (int)input->cursor_position + 1,
-        input->buffer + (int)input->cursor_position,
+    if (input->buffer_size != input->cursor_position)
+        memmove(input->buffer + (int)input->cursor_position + 1,
+            input->buffer + (int)input->cursor_position,
         input->buffer_size - (int)input->cursor_position + 1);
     input->buffer[(int)input->cursor_position] = input->c;
     input->buffer[input->buffer_size + 1] = 0;
@@ -61,7 +62,8 @@ int add_char(input_t *input, bool *isSpe)
     my_putchar(input->c);
     if (new_str(input) == 84)
         return 84;
-    if ((*isSpe) == true || input->c > 0) {
+    if (((*isSpe) == true || input->c > 0) &&
+    (int)input->buffer_size != input->cursor_position) {
         middle(input);
         (*isSpe) = false;
     } else

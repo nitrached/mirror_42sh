@@ -10,7 +10,7 @@
 #include "minishell.h"
 #include "my.h"
 #include <string.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 static int check_special_characters(input_t *input)
 {
@@ -26,7 +26,7 @@ static int check_special_characters(input_t *input)
 char *parse_input(void)
 {
     struct termios old;
-    input_t input = {NULL, 0, 0, 0};
+    input_t input = {malloc(sizeof(char)), 0, 0, 0};
     bool isSpe = false;
 
     set_non_canonical(&old);

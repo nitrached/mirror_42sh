@@ -29,12 +29,17 @@ SRCS		= src/main.c\
 			  src/input/specials_characters/arrow.c\
 			  src/input/specials_characters/backspace.c\
 			  src/input/specials_characters/erase.c\
+			  src/input/specials_characters/tab/tab.c\
+			  src/input/specials_characters/tab/no_word.c\
+			  src/input/specials_characters/tab/one_occurrence.c\
+			  src/input/specials_characters/tab/several_occurrences.c\
+			  src/input/specials_characters/tab/occurrences.c\
 			  src/utiles/remove_last_char.c\
 			  src/input/refactor.c\
 
 OBJS     = $(SRCS:.c=.o)
 
-CFLAGS   = -Wall -Wextra -I include -I lib/include -g
+CFLAGS   = -Wall -Wextra -I include -I lib/include -g3
 
 	GREEN=\033[1;32m
 	YELLOW=\033[1;93m

@@ -14,22 +14,8 @@ void arrow(input_t *input)
 {
     read(STDIN_FILENO, &input->c, 1);
     read(STDIN_FILENO, &input->c, 1);
-    if (input->c == 'B')
+    if (input->c == 'B' || input->c == 'A')
         return;
-    if (input->c == 'A') {
-        for (; input->cursor_position > 0; input->cursor_position--)
-            my_putstr("\033[D");
-        my_putstr("\033[K");
-        free(input->buffer);
-        input->buffer = malloc(sizeof(char) * 3);
-        input->buffer[0] = 'l';
-        input->buffer[1] = 's';
-        input->buffer[2] = 0;
-        input->buffer_size = 2;
-        my_putstr(input->buffer);
-        input->buffer_size = my_strlen(input->buffer);
-        input->cursor_position = my_strlen(input->buffer);
-    }
     if (input->c == 'C' &&
     input->cursor_position < my_strlen(input->buffer)) {
         if (input->buffer[(int) input->cursor_position + 1] < 0)

@@ -81,6 +81,13 @@ typedef struct keybind_s {
     void (*ptr)(input_t *input);
 } keybind_t;
 
+typedef struct format_s {
+    int size;
+    int width;
+    bool first;
+    int max_length;
+}format_t;
+
 
 int my_minishell(char **env);
 //int command_handler(minishell_t *minishell);
@@ -168,13 +175,19 @@ void arrow(input_t *input);
 void delete(input_t *input);
 int add_char(input_t *input, bool *isSpe);
 void erase(input_t *input);
+void tab(input_t *input);
 void middle(input_t *input);
 void remove_char_from_str(input_t *input);
+int no_word(input_t *input, char **buffer);
+void one_occurrence(char **files, input_t *input, char *model);
+void several_occurrences(char **files, input_t *input, char *model);
+int count_occurrences(char **files, char *model);
 
-static const keybind_t tab_keybinds[4] = {
+static const keybind_t tab_keybinds[5] = {
         {'\033', &arrow},
         {127, &delete},
         {126, &erase},
+        {9, &tab},
         {0, 0},
 };
 
