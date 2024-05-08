@@ -31,6 +31,8 @@ static int compare_str(const char *files, const char *model, format_t *format)
 {
     int i = 0;
 
+    if (files[0] == '.')
+        return 0;
     for (; files[i] == model[i]; i++);
     if (i == my_strlen(model)) {
         if (format->first) {
