@@ -10,6 +10,8 @@
     #include <sys/types.h>
     #include <signal.h>
     #include <stddef.h>
+    #include <stdbool.h>
+    #include <termios.h>
 
 typedef struct minishell_s {
     char **user_input;
@@ -46,6 +48,25 @@ typedef struct command_s {
     int macro;
     char *error_message;
 } command_t;
+
+typedef struct input_s {
+    char *buffer;
+    size_t buffer_size;
+    char c;
+    double cursor_position;
+} input_t;
+
+typedef struct keybind_s {
+    char key;
+    void (*ptr)(input_t *input);
+} keybind_t;
+
+typedef struct format_s {
+    int size;
+    int width;
+    bool first;
+    int max_length;
+}format_t;
 
 int my_minishell(char **env);
 int command_handler(minishell_t *minishell);
@@ -115,12 +136,39 @@ void handle_error_tab(int i, int num_sig);
 int handle_error(char *command);
 int pipe_error(char **args, char *command, minishell_t *minishell);
 char **my_str_to_wordarray_multi_delim(char *str, char *delimiters[]);
+void remove_last_char(char **buffer, const size_t buffer_size);
 
 //handle_pipe
 int parse_pipe(minishell_t *minishell, char **line, char ***args);
 
 //handle_redirections
 int find_redirection(char *command_line, minishell_t *minishell);
+
+//input
+char *parse_input(void);
+void reset_term(struct termios *old);
+void set_non_canonical(struct termios *old);
+void arrow(input_t *input);
+void delete(input_t *input);
+int add_char(input_t *input, bool *isSpe);
+void erase(input_t *input);
+void tab(input_t *input);
+void middle(input_t *input);
+void remove_char_from_str(input_t *input);
+int no_word(input_t *input, char **buffer);
+void one_occurrence(char **files, input_t *input, char *model);
+void several_occurrences(char **files, input_t *input, char *model);
+int count_occurrences(char **files, char *model);
+char **retrieve_files(char *path);
+int check_function(char **files, char *buffer, char *model);
+
+static const keybind_t tab_keybinds[5] = {
+    {'\033', &arrow},
+    {127, &delete},
+    {126, &erase},
+    {9, &tab},
+    {0, 0},
+};
 
     #define USER_INPUT minishell->user_input
     #define ENV minishell->env
