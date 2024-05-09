@@ -1,0 +1,33 @@
+/*
+** EPITECH PROJECT, 2024
+** 42sh
+** File description:
+** arrow.c
+*/
+
+#include <unistd.h>
+#include "../../../include/minishell.h"
+#include "../../../include/my.h"
+#include <malloc.h>
+
+void arrow(input_t *input)
+{
+    read(STDIN_FILENO, &input->c, 1);
+    read(STDIN_FILENO, &input->c, 1);
+    if (input->c == 'B' || input->c == 'A')
+        return;
+    if (input->c == 'C' &&
+    input->cursor_position < my_strlen(input->buffer)) {
+        if (input->buffer[(int) input->cursor_position + 1] < 0)
+            input->cursor_position++;
+        input->cursor_position++;
+        my_putstr("\033[C");
+        return;
+    }
+    if (input->c == 'D' && input->cursor_position > 0) {
+        if (input->buffer[(int) input->cursor_position - 1] < 0)
+            input->cursor_position--;
+        input->cursor_position--;
+        my_putstr("\033[D");
+    }
+}
