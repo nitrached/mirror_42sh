@@ -31,7 +31,7 @@ char **retrieve_files(char *path)
     return buffer;
 }
 
-static char *get_word(char *string, int string_size)
+static char *get_word(char *string, int string_size, char ***files)
 {
     int i = string_size;
 
@@ -39,6 +39,8 @@ static char *get_word(char *string, int string_size)
         string = "\0";
     i--;
     for (; i >= 0 && string[i] > 32; i--);
+    if (i == -1 && string[i + 1] != 0)
+        check_function(files);
     i++;
     for (int j = 0; j < i; j++) {
         string++;
@@ -49,10 +51,8 @@ static char *get_word(char *string, int string_size)
 void tab(input_t *input)
 {
     char **files = retrieve_files(".");
-    char *model = get_word(input->buffer, (int)input->buffer_size);
+    char *model = get_word(input->buffer, (int)input->buffer_size, &files);
 
-    if (check_function(files, input->buffer, model) == 1)
-        return;
     if (count_occurrences(files, model) > 1)
         several_occurrences(files, input, model);
     else

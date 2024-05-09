@@ -160,7 +160,7 @@ void one_occurrence(char **files, input_t *input, char *model);
 void several_occurrences(char **files, input_t *input, char *model);
 int count_occurrences(char **files, char *model);
 char **retrieve_files(char *path);
-int check_function(char **files, char *buffer, char *model);
+int check_function(char ***files);
 
 static const keybind_t tab_keybinds[5] = {
     {'\033', &arrow},

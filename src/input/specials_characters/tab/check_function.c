@@ -5,12 +5,10 @@
 ** check_function.c
 */
 
-#include "../../../../include/minishell.h"
+#include "minishell.h"
 
-int check_function(char **files, char *buffer, char *model)
+int check_function(char ***files)
 {
-    (void)files;
-    (void)buffer;
-    (void)model;
+    (*files) = retrieve_files("/bin");
     return 0;
 }
