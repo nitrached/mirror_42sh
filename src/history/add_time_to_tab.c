@@ -11,40 +11,28 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
-static
-char *inttostr(int number)
-{
-    int temp = number;
-    int count = (number == 0) ? 1 : 0;
-    char *str = (char *)malloc((count + 1) * sizeof(char));
-
-    while (temp != 0) {
-        temp /= 10;
-        count++;
-    }
-    for (int i = count - 1; i >= 0; i--) {
-        str[i] = (number % 10) + '0';
-        number /= 10;
-    }
-    str[count] = '\0';
-    return str;
-}
-
-static
 void complete_line(minishell_t *all, char **new_tab, int i)
 {
-    time_t current_time;
-    struct tm *local_time;
+    struct timeval temps;
+    long int secondes = 0;
+    long int minutes = 0;
+    long int heures = 0;
+    char *str = malloc(sizeof(char) * 4);
 
-    current_time = time(NULL);
-    local_time = localtime(&current_time);
-    new_tab[i] = malloc(sizeof(char) * (strlen(inttostr(local_time->tm_hour))
-        + 4));
-    new_tab[i][0] = '\0';
-    strcat(new_tab[i], inttostr(local_time->tm_hour));
+    gettimeofday(&temps, NULL);
+    secondes = temps.tv_sec;
+    minutes = (secondes / 60) % 60;
+    heures = (secondes / 3600) % 24;
+    heures += 2;
+    new_tab[i] = malloc(sizeof(char) * 6);
+    sprintf(str, "%02ld", heures);
+    strcat(new_tab[i], str);
     strcat(new_tab[i], ":");
-    strcat(new_tab[i], inttostr(local_time->tm_min));
+    str = malloc(sizeof(char) * 4);
+    sprintf(str, "%02ld", minutes);
+    strcat(new_tab[i], str);
     new_tab[i + 1] = NULL;
     all->tab_history_time = new_tab;
 }

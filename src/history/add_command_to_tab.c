@@ -26,10 +26,11 @@ void add_command_to_tab(char *command, minishell_t *all)
         i++;
     }
     if ((i >= 1 && strcmp(new_tab[i - 1], command) == 0)
-        || strcmp(command, "\n") == 0)
+        || strcmp(command, "\n") == 0 || strcmp(command, "\0") == 0)
         return;
     new_tab[i] = malloc(sizeof(char) * (strlen(command) + 1));
     strcpy(new_tab[i], command);
     new_tab[i + 1] = NULL;
     all->tab_history = new_tab;
+    add_time_to_tab(all);
 }

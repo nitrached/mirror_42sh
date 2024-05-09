@@ -15,5 +15,5 @@ test:
 	./tester.sh > ../output.txt
 	rm test_redirection_right
 	rm test_double_redirection_right
-	rm tests
+	rm test
 	rm $(NAME)
