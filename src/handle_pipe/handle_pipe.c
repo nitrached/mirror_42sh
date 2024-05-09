@@ -125,6 +125,8 @@ int parse_pipe(minishell_t *minishell, char **line, char ***args)
     if (isatty(STDIN_FILENO))
         my_putstr("$> ");
     *line = parse_input();
+    add_command_to_tab(*line, minishell);
+    add_time_to_tab(minishell);
     if (*line == NULL)
         return 84;
     *args = my_str_to_wordarray(*line, ";");

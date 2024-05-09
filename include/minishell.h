@@ -30,6 +30,8 @@ typedef struct minishell_s {
     int cpt;
     int stdin_savior;
     int stdout_savior;
+    char **tab_history;
+    char **tab_history_time;
 } minishell_t;
 
 typedef struct word_array_s {
@@ -68,6 +70,12 @@ typedef struct format_s {
     int max_length;
 }format_t;
 
+//history
+void add_command_to_tab(char *command, minishell_t *all);
+void add_time_to_tab(minishell_t *all);
+int display_history(minishell_t *all);
+//zebi
+
 int my_minishell(char **env);
 int command_handler(minishell_t *minishell);
 //command handler
@@ -84,6 +92,7 @@ static const command_handler_t COMMAND_HANDLER_TAB[] = {
     {"setenv", &my_setenv},
     {"unsetenv", &my_unsetenv},
     {"exit", &my_exit},
+    {"history", &display_history},
     {NULL, NULL}
 };
 
