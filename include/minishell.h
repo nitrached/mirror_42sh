@@ -92,6 +92,7 @@ static const command_handler_t COMMAND_HANDLER_TAB[] = {
     {"setenv", &my_setenv},
     {"unsetenv", &my_unsetenv},
     {"exit", &my_exit},
+    {"history", &display_history},
     {NULL, NULL}
 };
 
