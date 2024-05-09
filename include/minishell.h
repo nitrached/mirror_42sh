@@ -73,7 +73,7 @@ typedef struct alias_s {
     char *command;
 } alias_t;
 
-typedef struct sub_sh_s{
+typedef struct sub_sh_s {
     bool in_quotes;
     bool in_double_quotes;
     char *word;

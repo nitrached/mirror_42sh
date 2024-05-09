@@ -82,7 +82,7 @@ int count_nb_alias(char **tab_rc)
     if (tab_rc == NULL)
         return 1;
     for (int i = 0; tab_rc[i]; i++)
-        if (tab_rc[i][0] != '#' && strncmp("alias", tab_rc[i], 5) == 0) 
+        if (tab_rc[i][0] != '#' && strncmp("alias", tab_rc[i], 5) == 0)
             nb++;
     if (nb == 0)
         return 1;
