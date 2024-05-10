@@ -28,7 +28,7 @@ void set_struct_piped(minishell_t *minishell, char **args)
     minishell->pipe_status = 0;
     for (j = 0; args[j] != NULL; j++);
     minishell->cpt = j;
-    minishell->pid = malloc(sizeof(int) * minishell->cpt - 1);
+    minishell->pid = malloc(sizeof(int) * minishell->cpt);
     for (j = 0; args[j] != NULL; j++)
         minishell->pid[j] = -1;
 }
