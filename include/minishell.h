@@ -37,6 +37,7 @@ typedef struct minishell_s {
     int stdout_savior;
     char **tab_history;
     char **tab_history_time;
+    int history_nav;
     alias_t **alias;
 } minishell_t;
 
@@ -66,7 +67,7 @@ typedef struct input_s {
 
 typedef struct keybind_s {
     char key;
-    void (*ptr)(input_t *input);
+    void (*ptr)(input_t *input, minishell_t *minishell);
 } keybind_t;
 
 typedef struct format_s {
@@ -177,14 +178,14 @@ int parse_pipe(minishell_t *minishell, char **line, char ***args);
 int find_redirection(char *command_line, minishell_t *minishell);
 
 //input
-char *parse_input(void);
+char *parse_input(minishell_t *minishell);
 void reset_term(struct termios *old);
 void set_non_canonical(struct termios *old);
-void arrow(input_t *input);
-void delete(input_t *input);
+void arrow(input_t *input, minishell_t *minishell);
+void delete(input_t *input, minishell_t *minishell);
 int add_char(input_t *input, bool *isSpe);
-void erase(input_t *input);
-void tab(input_t *input);
+void erase(input_t *input, minishell_t *minishell);
+void tab(input_t *input, minishell_t *minishell);
 void middle(input_t *input);
 void remove_char_from_str(input_t *input);
 int no_word(input_t *input, char **buffer);

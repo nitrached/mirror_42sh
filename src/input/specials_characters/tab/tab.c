@@ -48,7 +48,7 @@ static char *get_word(char *string, int string_size, char ***files)
     return string;
 }
 
-void tab(input_t *input)
+void tab(input_t *input, minishell_t *minishell)
 {
     char **files = retrieve_files(".");
     char *model = get_word(input->buffer, (int)input->buffer_size, &files);

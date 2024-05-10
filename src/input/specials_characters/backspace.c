@@ -30,7 +30,7 @@ void remove_char_from_str(input_t *input)
     (input->buffer)[input->buffer_size] = 0;
 }
 
-void delete(input_t *input)
+void delete(input_t *input, minishell_t *minishell)
 {
     if (input->buffer_size > 0 && ((int)input->cursor_position) > 0) {
         my_putstr("\b \b");

@@ -8,7 +8,7 @@
 #include "../../../include/my.h"
 #include "../../../include/minishell.h"
 
-void erase(input_t *input)
+void erase(input_t *input, minishell_t *minishell)
 {
     if (input->buffer_size > 0 && (input->cursor_position)
     < input->buffer_size) {
@@ -16,6 +16,6 @@ void erase(input_t *input)
         input->cursor_position++;
         if (input->buffer[(int)input->cursor_position] < 0)
             input->cursor_position++;
-        delete(input);
+        delete(input, minishell);
     }
 }

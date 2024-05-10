@@ -12,18 +12,18 @@
 #include <string.h>
 #include <stdlib.h>
 
-static int check_special_characters(input_t *input)
+static int check_special_characters(input_t *input, minishell_t *minishell)
 {
     for (int i = 0; tab_keybinds[i].key != 0; i++) {
         if (tab_keybinds[i].key == input->c) {
-            tab_keybinds[i].ptr(input);
+            tab_keybinds[i].ptr(input, minishell);
             return 1;
         }
     }
     return 0;
 }
 
-char *parse_input(void)
+char *parse_input(minishell_t *minishell)
 {
     struct termios old;
     input_t input = {malloc(sizeof(char)), 0, 0, 0};
@@ -35,7 +35,7 @@ char *parse_input(void)
             reset_term(&old);
             return NULL;
         }
-        if (check_special_characters(&input) == 1)
+        if (check_special_characters(&input, minishell) == 1)
             continue;
         if (add_char(&input, &isSpe) == 84)
             return NULL;

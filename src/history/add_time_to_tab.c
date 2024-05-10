@@ -51,5 +51,6 @@ void add_time_to_tab(minishell_t *all)
         strcpy(new_tab[i], all->tab_history_time[i]);
         i++;
     }
+    all->history_nav = i + 1;
     complete_line(all, new_tab, i);
 }

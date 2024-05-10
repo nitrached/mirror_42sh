@@ -34,6 +34,7 @@ minishell_t *init_struct(void)
     shell->tab_history[0] = NULL;
     shell->tab_history_time = malloc(sizeof(char *) * 1);
     shell->tab_history_time[0] = NULL;
+    shell->history_nav = -1;
     shell->alias = init_alias();
     return (shell);
 }

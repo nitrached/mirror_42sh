@@ -124,7 +124,7 @@ int parse_pipe(minishell_t *minishell, char **line, char ***args)
 {
     if (isatty(STDIN_FILENO))
         my_putstr("$> ");
-    *line = parse_input();
+    *line = parse_input(minishell);
     if (*line == NULL)
         return 84;
     else
