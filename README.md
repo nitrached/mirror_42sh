@@ -5,13 +5,12 @@ Le projet 42sh est un interpréteur de commandes (shell) développé dans le cad
 
 ## Fonctionnalités principales
 - Interprétation et exécution de commandes
-- Gestion des processus en arrière-plan et en premier plan
-- Redirection d'entrée/sortie
-- Pipes
-- Expansion de variables d'environnement
-- Gestion des signaux
-- Historique des commandes avec recherche et navigation
-- Complétion automatique des commandes et des chemins de fichiers
+- Redirection d'entrée/sortie ('>' et '<')
+- Pipes ('|')
+- Complétion automatique des commandes et des chemins de fichiers (tab)
+- Historique des commandes avec recherche et navigation ("history" ainsi que les flèches haut et bas)
+- Gestion de conditions ("&&" et "||")
+- Alias et 42shrc
 
 ## Prérequis
 - Système d'exploitation compatible Unix (Linux, macOS)
@@ -21,7 +20,7 @@ Le projet 42sh est un interpréteur de commandes (shell) développé dans le cad
 ## Installation
 1. Clonez le dépôt GitHub :
    ```
-   git clone https://github.com/EpitechPromo2028/B-PSU-200-REN-2-1-42sh-elie.stroun/42sh.git
+   git clone https://github.com/EpitechPromo2028/B-PSU-200-REN-2-1-42sh-elie.stroun/42sh.git 42sh
    ```
 3. Accédez au répertoire du projet :
    ```
@@ -37,8 +36,10 @@ Le projet 42sh est un interpréteur de commandes (shell) développé dans le cad
    ```
    ./42sh
    ```
+
 2. Utilisez le shell en saisissant des commandes Unix standard.
-3. Appuyez sur `Ctrl + D` pour quitter le shell.
+
+3. Tapez sur `exit` pour quitter le shell ou appuyez sur `ctrl + D`.
 
 ## Contributeurs
 - [Elie Stroun](https://github.com/eliestroun14)
