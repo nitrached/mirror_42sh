@@ -125,10 +125,10 @@ int parse_pipe(minishell_t *minishell, char **line, char ***args)
     if (isatty(STDIN_FILENO))
         my_putstr("$> ");
     *line = parse_input();
-    if (*line != NULL)
-        add_command_to_tab(*line, minishell);
     if (*line == NULL)
         return 84;
+    else
+        add_command_to_tab(*line, minishell);
     *args = my_str_to_wordarray(*line, ";");
     for (int i = 0; (*args)[i] != NULL; i++) {
         handle_conditions(minishell, args, i);

@@ -19,14 +19,14 @@ void complete_line(minishell_t *all, char **new_tab, int i)
     long int secondes = 0;
     long int minutes = 0;
     long int heures = 0;
-    char *str = malloc(sizeof(char) * 4);
+    char *str = calloc(4, sizeof(char));
 
     gettimeofday(&temps, NULL);
     secondes = temps.tv_sec;
     minutes = (secondes / 60) % 60;
     heures = (secondes / 3600) % 24;
     heures += 2;
-    new_tab[i] = malloc(sizeof(char) * 6);
+    new_tab[i] = calloc(6, sizeof(char));
     sprintf(str, "%02ld", heures);
     strcat(new_tab[i], str);
     strcat(new_tab[i], ":");

@@ -44,10 +44,6 @@ SRCS		+= src/input/specials_characters/tab/check_function.c
 SRCS		+= src/history/add_command_to_tab.c
 SRCS		+= src/history/add_time_to_tab.c
 SRCS		+= src/history/display_history.c
-SRCS		+= src/alias/init_alias.c
-SRCS		+= src/alias/alias.c
-SRCS		+= src/alias/my_realloc.c
-SRCS		+= src/alias/sub_sh_word_array.c
 
 
 OBJS     = $(SRCS:.c=.o)
@@ -86,7 +82,7 @@ debug: fclean
 debug: CFLAGS += -g
 debug: all
 
-tests_run: all
+test_run: all
 	make -C tests
 
 .c.o:

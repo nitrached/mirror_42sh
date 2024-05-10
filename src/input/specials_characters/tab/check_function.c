@@ -7,8 +7,7 @@
 
 #include "minishell.h"
 
-int check_function(char ***files)
+void check_function(char ***files)
 {
     (*files) = retrieve_files("/bin");
-    return 0;
 }
