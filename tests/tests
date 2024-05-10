@@ -1,4 +1,4 @@
-[1]
+
 NAME="Nothing"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""

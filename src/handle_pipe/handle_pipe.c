@@ -127,6 +127,8 @@ int parse_pipe(minishell_t *minishell, char **line, char ***args)
     *line = parse_input();
     if (*line == NULL)
         return 84;
+    else
+        add_command_to_tab(*line, minishell);
     *args = my_str_to_wordarray(*line, ";");
     for (int i = 0; (*args)[i] != NULL; i++) {
         handle_conditions(minishell, args, i);

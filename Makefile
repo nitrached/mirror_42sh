@@ -41,10 +41,9 @@ SRCS		+= src/input/specials_characters/tab/several_occurrences.c
 SRCS		+= src/input/specials_characters/tab/occurrences.c
 SRCS		+= src/input/refactor.c
 SRCS		+= src/input/specials_characters/tab/check_function.c
-SRCS		+= src/alias/init_alias.c
-SRCS		+= src/alias/alias.c
-SRCS		+= src/alias/my_realloc.c
-SRCS		+= src/alias/sub_sh_word_array.c
+SRCS		+= src/history/add_command_to_tab.c
+SRCS		+= src/history/add_time_to_tab.c
+SRCS		+= src/history/display_history.c
 
 
 OBJS     = $(SRCS:.c=.o)

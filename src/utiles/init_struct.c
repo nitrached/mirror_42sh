@@ -20,7 +20,12 @@ minishell_t *init_struct(void)
     shell->args = NULL;
     shell->is_piped = -1;
     shell->command_index = -1;
+    shell->last_stdout = -1;
     shell->pipefd[0] = 0;
     shell->pipefd[1] = 0;
+    shell->tab_history = malloc(sizeof(char *) * 1);
+    shell->tab_history[0] = NULL;
+    shell->tab_history_time = malloc(sizeof(char *) * 1);
+    shell->tab_history_time[0] = NULL;
     return (shell);
 }
