@@ -53,6 +53,7 @@ void tab(input_t *input, minishell_t *minishell)
     char **files = retrieve_files(".");
     char *model = get_word(input->buffer, (int)input->buffer_size, &files);
 
+    (void)minishell;
     if (count_occurrences(files, model) > 1)
         several_occurrences(files, input, model);
     else

@@ -44,6 +44,8 @@ Le projet 42sh est un interpréteur de commandes (shell) développé dans le cad
 - [Elie Stroun](https://github.com/eliestroun14)
 - [Manech Dubreil](https://github.com/nitrached)
 - [Pablo Jesus](https://github.com/Smoulmouc)
+- [Sacha Dujardin](https://github.com/Sacharbon)
+- [Pierre Montaret](https://github.com/impierrooo)
 
 ## Remarques
 - Ce projet est développé dans le cadre du cursus d'Epitech et est destiné à un usage éducatif.
