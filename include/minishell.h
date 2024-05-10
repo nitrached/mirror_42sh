@@ -13,6 +13,11 @@
     #include <stdbool.h>
     #include <termios.h>
 
+typedef struct alias_s {
+    char *name;
+    char *command;
+} alias_t;
+
 typedef struct minishell_s {
     char **user_input;
     char **env;
@@ -32,6 +37,7 @@ typedef struct minishell_s {
     int stdout_savior;
     char **tab_history;
     char **tab_history_time;
+    alias_t **alias;
 } minishell_t;
 
 typedef struct word_array_s {
@@ -70,6 +76,15 @@ typedef struct format_s {
     int max_length;
 }format_t;
 
+typedef struct sub_sh_s {
+    bool in_quotes;
+    bool in_double_quotes;
+    char *word;
+    int j;
+    int k;
+    char **result;
+} sub_sh_t;
+
 int my_minishell(char **env);
 int command_handler(minishell_t *minishell);
 //command handler
@@ -79,6 +94,12 @@ int my_env(minishell_t *minishell);
 int my_setenv(minishell_t *minishell);
 int my_unsetenv(minishell_t *minishell);
 int my_exit(minishell_t *minishell);
+
+//alias
+alias_t **init_alias(void);
+alias_t **alias_cmd(char **arg, alias_t **alias);
+alias_t **my_realloc(alias_t **old_tab, alias_t *lign_to_add);
+char **sub_sh_word_array(char *string, char *delimiter);
 
 //history
 void add_command_to_tab(char *command, minishell_t *all);

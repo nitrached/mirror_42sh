@@ -93,7 +93,8 @@ alias_t **init_alias(void)
 {
     char *rc = open_file("42shrc");
     char **tab_rc = my_str_to_wordarray(rc, "\n");
-    alias_t **alias = malloc(sizeof(alias_t *) * count_nb_alias(tab_rc));
+    int nb_alias = count_nb_alias(tab_rc);
+    alias_t **alias = malloc(sizeof(alias_t *) * (nb_alias + 1));
     int j = 0;
 
     if (tab_rc == NULL)
@@ -105,5 +106,6 @@ alias_t **init_alias(void)
             j++;
         }
     }
+    alias[j] = NULL;
     return alias;
 }

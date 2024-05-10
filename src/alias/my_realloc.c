@@ -10,14 +10,14 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-alias_t *my_strcpy_realloc(alias_t *dest, alias_t const *src)
+static alias_t *my_strcpy_realloc(alias_t *dest, alias_t const *src)
 {
     dest->command = src->command;
     dest->name = src->name;
     return dest;
 }
 
-alias_t *my_strdup(const alias_t *src)
+static alias_t *my_strdup(const alias_t *src)
 {
     alias_t *new_str;
 
