@@ -82,7 +82,7 @@ debug: fclean
 debug: CFLAGS += -g
 debug: all
 
-test_run: all
+tests_run: all
 	make -C tests
 
 .c.o:
