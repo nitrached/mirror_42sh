@@ -48,6 +48,7 @@ SRCS		+= src/alias/init_alias.c
 SRCS		+= src/alias/alias.c
 SRCS		+= src/alias/my_realloc.c
 SRCS		+= src/alias/sub_sh_word_array.c
+SRCS		+= src/utiles/free_tab.c
 
 
 OBJS     = $(SRCS:.c=.o)

@@ -9,6 +9,6 @@
 
 int my_exit(minishell_t *minishell)
 {
-    (void)minishell;
+    free_struc_minishell(minishell);
     exit(0);
 }

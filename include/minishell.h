@@ -100,6 +100,7 @@ alias_t **init_alias(void);
 alias_t **alias_cmd(char **arg, alias_t **alias);
 alias_t **my_realloc(alias_t **old_tab, alias_t *lign_to_add);
 char **sub_sh_word_array(char *string, char *delimiter);
+void free_alias(alias_t **alias);
 
 //history
 void add_command_to_tab(char *command, minishell_t *all);
@@ -166,6 +167,8 @@ int handle_error(char *command);
 int pipe_error(char **args, char *command, minishell_t *minishell);
 char **my_str_to_wordarray_multi_delim(char *str, char *delimiters[]);
 void remove_last_char(char **buffer, const size_t buffer_size);
+void free_tab(char **tab);
+void free_struc_minishell(minishell_t *minishell);
 
 //handle_pipe
 int parse_pipe(minishell_t *minishell, char **line, char ***args);

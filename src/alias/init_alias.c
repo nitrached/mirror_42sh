@@ -98,6 +98,7 @@ alias_t **init_alias(void)
     alias_t **alias = malloc(sizeof(alias_t *) * (nb_alias + 1));
     int j = 0;
 
+    free(rc);
     if (tab_rc == NULL)
         return NULL;
     for (int i = 0; tab_rc[i]; i++) {
@@ -108,5 +109,6 @@ alias_t **init_alias(void)
         }
     }
     alias[j] = NULL;
+    free_tab(tab_rc);
     return alias;
 }

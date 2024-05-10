@@ -7,6 +7,20 @@
 #include "minishell.h"
 #include <string.h>
 #include <stdlib.h>
+#include "my.h"
+
+static char **copy_tab(word_array_t *multi)
+{
+    char **new_tab = NULL;
+    int len = 0;
+
+    for (; multi->tab[len] != NULL; len++);
+    new_tab = malloc(sizeof(char *) * (len + 1));
+    for (int i = 0; i < len; i++)
+        new_tab[i] = my_strdup(multi->tab[i]);
+    new_tab[len] = NULL;
+    return new_tab;
+}
 
 static
 int check_word_delim(char *str, char *delimiters)
@@ -80,9 +94,12 @@ int exists(char *str, char *delimiters[])
 char **my_str_to_wordarray_multi_delim(char *str, char *delimiters[])
 {
     word_array_t *multi = malloc(sizeof(word_array_t));
+    char **tab = NULL;
 
-    if (!exists(str, delimiters))
+    if (!exists(str, delimiters)) {
+        free(multi);
         return NULL;
+    }
     multi->tab = NULL;
     multi->tab_index = 0;
     multi->index = 0;
@@ -90,5 +107,8 @@ char **my_str_to_wordarray_multi_delim(char *str, char *delimiters[])
     for (; multi->index < (int)(strlen(str)); multi->index++) {
         check_delimiters(str, delimiters, multi);
     }
-    return multi->tab;
+    tab = copy_tab(multi);
+    free(multi->tab);
+    free(multi);
+    return tab;
 }
