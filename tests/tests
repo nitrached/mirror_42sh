@@ -355,3 +355,12 @@ CLEAN=""
 TESTS=
   echo "ls && alias test ls"
 [43-END]
+
+[44]
+NAME="A pipe with a builtin ?"
+SETUP="export VAR1=VALEUR1 ; OLDPATH=$PATH ; PATH='/bin:/usr/bin'"
+CLEAN="PATH=$OLDPATH"
+TESTS=
+  echo '/bin/ls | cd /usr'
+  echo 'ls -l'
+[44-END]
