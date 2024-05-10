@@ -53,10 +53,11 @@ static alias_t *put_in_alias(alias_t *alias, char *rc)
     char **arg = sub_sh_word_array(rc, " =");
     int verif = 0;
 
+    alias->command = malloc(sizeof(char *));
     for (int i = 0; arg[i] != NULL; i++) {
         if ((arg[i][0] == '\"' || arg[i][0] == '\'') && verif == 1) {
             alias->command = malloc(sizeof(char) * (strlen(arg[i]) - 1));
-            alias->command = suite(arg[i]);
+            alias->command[0] = suite(arg[i]);
         }
         if ((arg[i][0] == '\"' || arg[i][0] == '\'') && verif == 0) {
             alias->name = malloc(sizeof(char) * (strlen(arg[i]) - 1));
@@ -93,9 +94,11 @@ alias_t **init_alias(void)
 {
     char *rc = open_file("42shrc");
     char **tab_rc = my_str_to_wordarray(rc, "\n");
-    alias_t **alias = malloc(sizeof(alias_t *) * count_nb_alias(tab_rc));
+    int nb_alias = count_nb_alias(tab_rc);
+    alias_t **alias = malloc(sizeof(alias_t *) * (nb_alias + 1));
     int j = 0;
 
+    free(rc);
     if (tab_rc == NULL)
         return NULL;
     for (int i = 0; tab_rc[i]; i++) {
@@ -105,5 +108,7 @@ alias_t **init_alias(void)
             j++;
         }
     }
+    alias[j] = NULL;
+    free_tab(tab_rc);
     return alias;
 }

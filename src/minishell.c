@@ -16,6 +16,19 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+void free_struc_minishell(minishell_t *minishell)
+{
+    free_tab(minishell->env);
+    free_tab(minishell->args);
+    free_alias(minishell->alias);
+    free(minishell->old_cd);
+    free(minishell->pid);
+    free_tab(minishell->tab_history);
+    free_tab(minishell->tab_history_time);
+    free_tab(minishell->user_input);
+    free(minishell);
+}
+
 int my_minishell(char **env)
 {
     char *line;
@@ -30,5 +43,6 @@ int my_minishell(char **env)
         }
     }
     free(line);
+    free_struc_minishell(minishell);
     return (minishell->status);
 }
