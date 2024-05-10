@@ -53,10 +53,11 @@ static alias_t *put_in_alias(alias_t *alias, char *rc)
     char **arg = sub_sh_word_array(rc, " =");
     int verif = 0;
 
+    alias->command = malloc(sizeof(char *));
     for (int i = 0; arg[i] != NULL; i++) {
         if ((arg[i][0] == '\"' || arg[i][0] == '\'') && verif == 1) {
             alias->command = malloc(sizeof(char) * (strlen(arg[i]) - 1));
-            alias->command = suite(arg[i]);
+            alias->command[0] = suite(arg[i]);
         }
         if ((arg[i][0] == '\"' || arg[i][0] == '\'') && verif == 0) {
             alias->name = malloc(sizeof(char) * (strlen(arg[i]) - 1));

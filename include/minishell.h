@@ -15,7 +15,7 @@
 
 typedef struct alias_s {
     char *name;
-    char *command;
+    char **command;
 } alias_t;
 
 typedef struct minishell_s {

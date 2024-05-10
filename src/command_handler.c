@@ -19,7 +19,7 @@ int command_handler(minishell_t *minishell)
     for (int i = 0; minishell->alias[i]; i++) {
         if (my_strcmp(minishell->alias[i]->name, USER_INPUT[0]) == 0) {
             free(USER_INPUT[0]);
-            USER_INPUT[0] = my_strdup(minishell->alias[i]->command);
+            USER_INPUT = my_tabdup(minishell->alias[i]->command);
         }
     }
     for (int i = 0; COMMAND_HANDLER_TAB[i].command != NULL; i++) {
