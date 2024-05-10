@@ -25,6 +25,7 @@ static int new_str(input_t *input)
     if (tmp != NULL) {
         input->buffer = tmp;
     } else {
+        free(tmp);
         fprintf(stderr, "Error: realloc failed\n");
         return 84;
     }

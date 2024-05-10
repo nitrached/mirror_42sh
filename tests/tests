@@ -1,10 +1,18 @@
-
+[1]
 NAME="Nothing"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
   echo ''
 [1-END]
+
+[2]
+NAME="history"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "history"
+[2-END]
 
 [3]
 NAME="Exec two command"
@@ -228,28 +236,6 @@ TESTS=
   echo "ls | grep n | grep i > test && echo "ca marche""
 [28-END]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [29]
 NAME="Test ||"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
@@ -337,3 +323,35 @@ CLEAN=""
 TESTS=
   echo "ls | grep n | grep i > test && echo "ca marche" || echo "ca marche pas""
 [39-END]
+
+[40]
+NAME="Test alias"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "alias test ls"
+[40-END]
+
+[41]
+NAME="Test alias with &&"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls && alias test ls"
+[41-END]
+
+[42]
+NAME="Test alias with && failed"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "c && alias test ls"
+[42-END]
+
+[43]
+NAME="Test alias with || failed"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls && alias test ls"
+[43-END]

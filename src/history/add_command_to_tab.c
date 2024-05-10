@@ -31,6 +31,7 @@ void add_command_to_tab(char *command, minishell_t *all)
     new_tab[i] = malloc(sizeof(char) * (strlen(command) + 1));
     strcpy(new_tab[i], command);
     new_tab[i + 1] = NULL;
+    free_tab(all->tab_history);
     all->tab_history = new_tab;
     add_time_to_tab(all);
 }
