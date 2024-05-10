@@ -13,35 +13,6 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-/* void complete_line(minishell_t *all, char **new_tab, int i)
-{
-    struct timeval temps;
-    long int secondes = 0;
-    long int minutes = 0;
-    long int heures = 0;
-    char *str = calloc(4, sizeof(char));
-
-    gettimeofday(&temps, NULL);
-    secondes = temps.tv_sec;
-    minutes = (secondes / 60) % 60;
-    heures = (secondes / 3600) % 24;
-    heures += 2;
-    new_tab[i] = calloc(6, sizeof(char));
-    sprintf(str, "%02ld", heures);
-    strcat(new_tab[i], str);
-    strcat(new_tab[i], ":");
-    str = malloc(sizeof(char) * 4);
-    sprintf(str, "%02ld", minutes);
-    strcat(new_tab[i], str);
-    new_tab[i + 1] = NULL;
-    all->tab_history_time = new_tab;
-} */
-
-
-
-
-
-
 static void get_current_time(struct timeval *temps, long int *secondes,
     long int *minutes, long int *heures)
 {
@@ -69,7 +40,8 @@ static void format_time_to_tab(char **new_tab, int i,
     free(str);
 }
 
-void complete_line(minishell_t *all, char **new_tab, int i) {
+void complete_line(minishell_t *all, char **new_tab, int i)
+{
     struct timeval temps;
     long int secondes = 0;
     long int minutes = 0;

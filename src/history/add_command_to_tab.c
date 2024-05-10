@@ -16,8 +16,7 @@ void add_command_to_tab(char *command, minishell_t *all)
     char **new_tab = NULL;
     int i = 0;
 
-    while (all->tab_history[i] != NULL)
-        i++;
+    for (; all->tab_history[i] != NULL; i++);
     new_tab = malloc(sizeof(char *) * (i + 2));
     i = 0;
     while (all->tab_history[i] != NULL) {
