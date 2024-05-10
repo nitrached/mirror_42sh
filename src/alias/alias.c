@@ -74,7 +74,8 @@ alias_t **alias_cmd(char **arg, alias_t **alias)
 void free_alias(alias_t **alias)
 {
     for (int i = 0; alias[i] != NULL; i++) {
-        free(alias[i]->command);
+        for (int j = 0; alias[i]->command[j] != NULL; j++)
+            free(alias[i]->command[j]);
         free(alias[i]->name);
         free(alias[i]);
     }

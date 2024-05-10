@@ -45,6 +45,7 @@ char *suite(char *arg)
             j++;
         }
     }
+    modif_arg[j] = '\0';
     return modif_arg;
 }
 
@@ -57,7 +58,7 @@ static alias_t *put_in_alias(alias_t *alias, char *rc)
     for (int i = 0; arg[i] != NULL; i++) {
         if ((arg[i][0] == '\"' || arg[i][0] == '\'') && verif == 1) {
             alias->command = malloc(sizeof(char) * (strlen(arg[i]) - 1));
-            alias->command[0] = suite(arg[i]);
+            alias->command = my_str_to_wordarray(arg[i], " \"");
         }
         if ((arg[i][0] == '\"' || arg[i][0] == '\'') && verif == 0) {
             alias->name = malloc(sizeof(char) * (strlen(arg[i]) - 1));

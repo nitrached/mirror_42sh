@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include "minishell.h"
+#include <stdio.h>
 
 static void init_pipe_minishell(minishell_t *shell)
 {
