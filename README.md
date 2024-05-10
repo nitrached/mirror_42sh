@@ -20,7 +20,7 @@ Le projet 42sh est un interpréteur de commandes (shell) développé dans le cad
 ## Installation
 1. Clonez le dépôt GitHub :
    ```
-   git clone https://github.com/EpitechPromo2028/B-PSU-200-REN-2-1-42sh-elie.stroun/42sh.git 42sh
+   git clone git@github.com:EpitechPromo2028/B-PSU-200-REN-2-1-42sh-elie.stroun.git 42sh
    ```
 3. Accédez au répertoire du projet :
    ```
