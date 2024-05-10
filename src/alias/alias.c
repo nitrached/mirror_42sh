@@ -33,7 +33,11 @@ alias_t **add_first_alias(alias_t **alias, char **arg)
 
 static alias_t **add_alias(alias_t **alias, char **arg)
 {
-    alias_t *line = init_line_alias(arg[2], arg[1]);
+    for (int i = 0; arg[i] != NULL; i++) {
+        printf("arg = %s\n", arg[i]);
+    }
+    
+    alias_t *line = init_line_alias(arg[1], arg[2]);
     int i;
 
     alias = my_realloc(alias, line);

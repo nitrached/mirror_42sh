@@ -30,9 +30,11 @@ void complete_line(minishell_t *all, char **new_tab, int i)
     sprintf(str, "%02ld", heures);
     strcat(new_tab[i], str);
     strcat(new_tab[i], ":");
+    free(str);
     str = malloc(sizeof(char) * 4);
     sprintf(str, "%02ld", minutes);
     strcat(new_tab[i], str);
+    free(str);
     new_tab[i + 1] = NULL;
     all->tab_history_time = new_tab;
 }
