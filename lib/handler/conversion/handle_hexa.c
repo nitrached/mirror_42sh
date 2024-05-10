@@ -31,7 +31,7 @@ int handle_hexa(parser_t *parser, va_list *ap, int size)
     char *precision = handle_precision(parser, arg_length, arg);
     flag_arguments_t *flag_args = malloc(sizeof(flag_arguments_t));
 
-    if (arg_int == NULL)
+    if (!arg_int)
         return size + my_put_nbr(0);
     flag_args->width = width;
     flag_args->precision = precision;

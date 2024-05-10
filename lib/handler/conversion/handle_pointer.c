@@ -29,7 +29,7 @@ int handle_pointer(parser_t *parser, va_list *ap, int size)
     char *width = handle_width(parser, arg_length + 2);
     char *precision = handle_precision(parser, arg_length, arg);
 
-    if (arg_int == NULL)
+    if (!arg_int)
         return size + my_putstr("(nil)");
     size += my_putstr(width) + my_putstr("0x");
     size += my_putstr(precision) + my_putstr(arg);
